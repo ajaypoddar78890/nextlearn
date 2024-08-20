@@ -1,12 +1,15 @@
 import React from "react";
+import dummmydata from "@/dummyData.json";
 
-const page = () => {
+const page = ({ params }) => {
+  const newId = params.id;
+  const newsItem = dummmydata.find((newsItem) => newsItem.id === newId);
   return (
-    <div>
-      <h1>this is th dynamic routs for sharing meals </h1>
-
-      <h1>meals = veg thali</h1>
-    </div>
+    <header>
+      <img src={newsItem?.image} alt="" />
+      <h1>{newsItem?.title}</h1>
+      <p>{newsItem?.description}</p>
+    </header>
   );
 };
 

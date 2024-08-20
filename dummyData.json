@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "Breaking News: Market Hits All-Time High",
+    "image": "https://as2.ftcdn.net/v2/jpg/08/03/72/29/1000_F_803722975_BWP5KftWuWBitMQCnRpcDGL2HPKLYkcR.jpg",
+    "description": "The stock market reached a new all-time high today, driven by strong earnings reports from major tech companies."
+  },
+  {
+    "id": "2",
+    "title": "Sports Update: Local Team Wins Championship",
+    "image": "https://as1.ftcdn.net/v2/jpg/08/39/71/44/1000_F_839714425_4ud8o7kfLBLQfopz4H9vq0oUIyZV3bBu.jpg",
+    "description": "In a thrilling match, the local team secured their championship victory, marking their first win in over a decade."
+  },
+  {
+    "id": "3",
+    "title": "Weather Alert: Heavy Rains Expected This Weekend",
+    "image": "https://as1.ftcdn.net/v2/jpg/03/27/55/60/1000_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
+    "description": "Meteorologists are predicting heavy rainfall and potential flooding in several regions over the weekend."
+  },
+  {
+    "id": "4",
+    "title": "Tech News: New Smartphone Released",
+    "image": "https://as2.ftcdn.net/v2/jpg/02/66/32/39/1000_F_266323959_96SMHi7Q0IsT4a8VAmsIRBwMxH18gW0g.jpg",
+    "description": "The latest smartphone model features cutting-edge technology, including a new camera system and enhanced battery life."
+  },
+  {
+    "id": "5",
+    "title": "Health Update: Tips for a Healthy Lifestyle",
+    "image": "https://as2.ftcdn.net/v2/jpg/02/09/53/11/1000_F_209531103_vL5MaF5fWcdpVcXk5yREBk3KMcXE0X7m.jpg",
+    "description": "Experts share valuable tips on how to maintain a healthy lifestyle through balanced diet and regular exercise."
+  }
+]
