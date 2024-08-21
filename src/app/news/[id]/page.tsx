@@ -1,17 +1,22 @@
 import React from "react";
 import dummydata from "@/dummyData.json";
+import { notFound } from "next/navigation";
 
 const Page = ({ params }) => {
   // Ensure params.id is a string and matches the id format in your JSON data
   const newsId = params.id;
-  console.log("params.id:", newsId); // Debugging
-  console.log("dummydata:", dummydata); // Debugging
+  // console.log("params.id:", newsId); // Debugging
+  // console.log("dummydata:", dummydata); // Debugging
 
   // Find the news item based on the id
   const newsItem = dummydata.find((newsItem) => newsItem.id === newsId);
 
   if (!newsItem) {
     return <div>News item not found</div>;
+  }
+
+  if (!newsItem) {
+    notFound();
   }
 
   return (
