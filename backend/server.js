@@ -4,6 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import newsRoutes from "./routes/newsroutes.js";
+import userRoutes from "./routes/userroutes.js";
 
 const app = express();
 
@@ -33,6 +34,8 @@ const connect = async () => {
 
 // routes
 // Use routes
+app.use("api", userRoutes);
+
 app.use("/api", newsRoutes);
 
 app.get("/", (req, res) => {
@@ -43,4 +46,3 @@ app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
   connect();
 });
- 
