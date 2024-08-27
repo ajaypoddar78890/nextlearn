@@ -35,7 +35,6 @@ const connect = async () => {
 // Use routes
 app.use("/api", newsRoutes);
 
-
 app.get("/", (req, res) => {
   res.send("hlww from the server ");
 });
@@ -44,3 +43,4 @@ app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
   connect();
 });
+ 
