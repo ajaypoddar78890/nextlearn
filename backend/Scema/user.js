@@ -7,5 +7,5 @@ const userScema = new mongoose.Schema({
   country: { type: String, required: true },
 });
 
-const user = mongoose.model(user, userScema);
+const user = mongoose.model("user", userScema);
 export default user;

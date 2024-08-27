@@ -34,7 +34,7 @@ const connect = async () => {
 
 // routes
 // Use routes
-app.use("api", userRoutes);
+app.use("/api", userRoutes);
 
 app.use("/api", newsRoutes);
 

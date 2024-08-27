@@ -5,8 +5,11 @@ export const createuser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    console.log(user.name);
+    res.status(201).json({
+      massage: "user created successfully",
+      Data: user,
+    });
   } catch (error) {
-    console.log(`getting error creating user ` % { error });
+    console.log(`getting error creating user  ${error}`);
   }
 };
