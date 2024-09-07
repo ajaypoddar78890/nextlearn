@@ -2,6 +2,7 @@
 import express from "express";
 import { createNews, getAllNews } from "../controller/newsControlar.js";
 
+
 const router = express.Router();
 
 // Route to create a news item
