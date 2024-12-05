@@ -38,14 +38,17 @@ export async function POST(req) {
 export async function GET() {
   try {
     if (!fs.existsSync(filePath)) {
+      console.log("blog.json does not exist, returning empty array.");
       return new Response(JSON.stringify([]), { status: 200 });
     }
 
     const fileData = fs.readFileSync(filePath, "utf8");
     const blogs = JSON.parse(fileData);
 
+    console.log("Fetched blogs:", blogs);
     return new Response(JSON.stringify(blogs), { status: 200 });
   } catch (error) {
+    console.error("Error fetching blogs:", error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });

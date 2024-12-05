@@ -8,7 +8,7 @@ const page = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await fetch("/api/blog/route.js");
+      const response = await fetch("/api/blog");
       const data = await response.json();
       setBlogs(data);
       console.log(data);
