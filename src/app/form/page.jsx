@@ -4,9 +4,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { redirect } from "next/navigation";
-
-const userFormorm = () => {
+const UserForm = () => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [post, setPost] = useState("");
@@ -27,8 +25,6 @@ const userFormorm = () => {
     } catch (error) {
       console.error("Error posting data:", error);
     }
-
-    redirect("/news");
   };
 
   return (
@@ -40,14 +36,14 @@ const userFormorm = () => {
 
       <div className="mb-4">
         <label
-          htmlFor="title"
+          htmlFor="name"
           className="block text-gray-700 font-semibold mb-2"
         >
           Name:
         </label>
         <input
           type="text"
-          id="title"
+          id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -57,14 +53,14 @@ const userFormorm = () => {
 
       <div className="mb-4">
         <label
-          htmlFor="image"
+          htmlFor="company"
           className="block text-gray-700 font-semibold mb-2"
         >
-          Company :
+          Company:
         </label>
         <input
           type="text"
-          id="image"
+          id="company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
           required
@@ -74,28 +70,29 @@ const userFormorm = () => {
 
       <div className="mb-4">
         <label
-          htmlFor="description"
+          htmlFor="post"
           className="block text-gray-700 font-semibold mb-2"
         >
           Post:
         </label>
         <textarea
-          id="description"
+          id="post"
           value={post}
           onChange={(e) => setPost(e.target.value)}
           required
           className="w-full text-black px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
         />
       </div>
+
       <div className="mb-4">
         <label
-          htmlFor="description"
+          htmlFor="country"
           className="block text-gray-700 font-semibold mb-2"
         >
-          country ::
+          Country:
         </label>
         <textarea
-          id="description"
+          id="country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           required
@@ -113,4 +110,4 @@ const userFormorm = () => {
   );
 };
 
-export default userFormorm;
+export default UserForm;
