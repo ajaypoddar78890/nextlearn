@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Import the useRouter hook
 
 const page = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const router = useRouter(); // Initialize useRouter
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,16 +19,22 @@ const page = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
     });
+
     console.log(blog);
 
     alert("Blog created successfully!");
+
+    // Redirect the user to the blog list page (or another page)
+    router.push("/blog");
+
+    // Clear the form fields
     setTitle("");
     setDescription("");
   };
 
   return (
-    <div className="max-w-2xl  mx-auto flex flex-col  container">
-      <h1>hi create the blog as you want as filing the requried fieald </h1>
+    <div className="max-w-2xl mx-auto flex flex-col container">
+      <h1>Create the blog by filling in the required fields</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-black">
         <input
@@ -35,7 +42,7 @@ const page = () => {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border p-2 "
+          className="border p-2"
           required
         />
         <textarea
