@@ -5,6 +5,7 @@ const userScema = new mongoose.Schema({
   company: { type: String, required: true },
   post: { type: String, required: true },
   country: { type: String, required: true },
+  // country: { type: String, required: true },
 });
 
 const user = mongoose.model("user", userScema);
