@@ -45,7 +45,7 @@ const ThreeDPage = () => {
         />
 
         {/* Point light for additional warm lighting */}
-        <pointLight position={[-10, -10, -10]} intensity={0.8} color="#ffcc88" />
+        <pointLight position={[0, 0, 0]} intensity={0.8} color="#ffffff" />
 
         {/* Your 3D model */}
         <Model />
