@@ -5,14 +5,14 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const Model = () => {
-  const { scene, materials } = useGLTF("/model/bmw.glb"); // Replace with your GLB file path
+  const { scene, materials } = useGLTF("/model/newcube.glb"); // Replace with your GLB file path
 
   // Example of modifying material properties
   if (materials) {
     Object.keys(materials).forEach((key) => {
       materials[key].metalness = 0.8; // Enhance reflectivity
       materials[key].roughness = 0.3; // Add slight roughness
-      materials[key].color.set("#FFD700"); // Change material color (gold in this case)
+      materials[key].color.set("#215c4a"); // Change material color (gold in this
     });
   }
 
@@ -45,7 +45,7 @@ const ThreeDPage = () => {
         />
 
         {/* Point light for additional warm lighting */}
-        <pointLight position={[0, 0, 0]} intensity={0.8} color="#ffffff" />
+        <pointLight position={[-50, 0, 0]} intensity={0.8} color="#ffffff" />
 
         {/* Your 3D model */}
         <Model />
@@ -55,7 +55,11 @@ const ThreeDPage = () => {
 
         {/* Post-processing effects */}
         <EffectComposer>
-          <Bloom intensity={1.3} luminanceThreshold={0.2} luminanceSmoothing={0.3} />
+          <Bloom
+            intensity={1.3}
+            luminanceThreshold={0.2}
+            luminanceSmoothing={0.3}
+          />
         </EffectComposer>
       </Canvas>
     </div>
