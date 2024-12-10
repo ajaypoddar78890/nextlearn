@@ -5,7 +5,7 @@ import ThreeDObject from "../app/components/ThreeDObject"
 export default function Home() {
   return (
     <>
-      <main className="   ">
+      <main className=" w-full h-full">
         
       
         <ThreeDObject/>
