@@ -1,32 +1,39 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, useAnimations, Environment } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useState } from "react";
 
-const Model = () => {
-  const { scene, materials } = useGLTF("/model/bmw.glb"); // Replace with your GLB file path
+const Model = ({ isPlaying }) => {
+  const { scene, animations } = useGLTF("/model/timepass.glb");  
+  const { actions } = useAnimations(animations, scene);
 
-  // Example of modifying material properties
-  if (materials) {
-    Object.keys(materials).forEach((key) => {
-      materials[key].metalness = 0.8; // Enhance reflectivity
-      materials[key].roughness = 0.3; // Add slight roughness
-      materials[key].color.set("#ffffff"); // Change material color (gold in this
-    });
+  // Toggle animation state
+  if (actions && animations.length > 0) {
+    const ballAction = actions[Object.keys(actions)[0]]; // Assuming the ball's animation is the first one
+    if (isPlaying) {
+      ballAction?.play();
+    } else {
+      ballAction?.stop();
+    }
   }
 
   return <primitive object={scene} scale={1.5} />;
 };
 
 const ThreeDPage = () => {
-  return (
-    <div style={{ width: "100%", height: "100vh" }}>
-      <Canvas shadows>
-        {/* Ambient light for soft overall lighting */}
-        <ambientLight intensity={0.5} />
+  const [isPlaying, setIsPlaying] = useState(true);  
 
-        {/* Directional light for strong highlights */}
+  const toggleAnimation = () => {
+    setIsPlaying((prev) => !prev);  
+  };
+
+  return (
+    <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+    
+      <Canvas shadows camera={{ position: [0, 2, 5], fov: 60 }}>
+        <ambientLight intensity={0.5} />
         <directionalLight
           position={[5, 10, 5]}
           intensity={1}
@@ -34,8 +41,6 @@ const ThreeDPage = () => {
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
         />
-
-        {/* Spot light for focused lighting */}
         <spotLight
           position={[10, 15, 10]}
           angle={0.3}
@@ -43,25 +48,31 @@ const ThreeDPage = () => {
           intensity={1.5}
           castShadow
         />
-
-        {/* Point light for additional warm lighting */}
-        <pointLight position={[-50, 0, 0]} intensity={0.8} color="#ffffff" />
-
-        {/* Your 3D model */}
-        <Model />
-
-        {/* Controls for camera movement */}
+        <Environment preset="sunset" background />
+        <Model isPlaying={isPlaying} />
         <OrbitControls makeDefault />
-
-        {/* Post-processing effects */}
         <EffectComposer>
-          <Bloom
-            intensity={1.3}
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.3}
-          />
+          <Bloom intensity={1} luminanceThreshold={1} luminanceSmoothing={1} />
         </EffectComposer>
       </Canvas>
+
+      {/* Play/Pause Button */}
+      <div
+        style={{
+          position: "absolute",
+          top: "90%",
+          left: "50%",
+          background: "rgba(255, 250, 250, )",
+          color: "Black",
+          padding: "30px 60px",
+          borderRadius: "15px",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+        onClick={toggleAnimation}
+      >
+        {isPlaying ? "Pause" : "Play"}
+      </div>
     </div>
   );
 };
