@@ -5,14 +5,14 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const Model = () => {
-  const { scene, materials } = useGLTF("/model/newcube.glb"); // Replace with your GLB file path
+  const { scene, materials } = useGLTF("/model/bmw.glb"); // Replace with your GLB file path
 
   // Example of modifying material properties
   if (materials) {
     Object.keys(materials).forEach((key) => {
       materials[key].metalness = 0.8; // Enhance reflectivity
       materials[key].roughness = 0.3; // Add slight roughness
-      materials[key].color.set("#215c4a"); // Change material color (gold in this
+      materials[key].color.set("#ffffff"); // Change material color (gold in this
     });
   }
 
