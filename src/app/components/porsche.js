@@ -71,7 +71,7 @@ const ThreeDPage = () => {
       <Canvas shadows camera={{ position: [0, 2, 5], fov: 60 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
-        <spotLight position={[3, 1, 4]} angle={0.3} intensity={5} />
+        <spotLight position={[3, 5, 4]} angle={0.3} intensity={5} />
          <Environment preset="city" background />
         <pointLight color="white
         " intensity={2} position={[0, 5, 0]} />
