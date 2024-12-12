@@ -1,6 +1,7 @@
 // import Image from "next/image";
 // import Link from "next/link";
-import ThreeDObject from "../app/components/ThreeDObject"
+// import ThreeDObject from "../app/components/ThreeDObject"
+import Porche from "../app/components/porsche"
 
 export default function Home() {
   return (
@@ -8,7 +9,8 @@ export default function Home() {
       <main className="">
         
       
-        <ThreeDObject/>
+        {/* <ThreeDObject/> */}
+        <Porche/>
       </main>
     </>
   );
