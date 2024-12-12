@@ -10,7 +10,7 @@ import {
 import { useState, useRef, useEffect } from "react";
 
 // Model Component
-const Model = ({ animationState, setAnimationTime, animationDuration }) => {
+const Model = ({ animationState, setAnimationTime, animationDuration, colorChange }) => {
   const { scene, animations } = useGLTF("/model/porsche.glb");
   const { actions } = useAnimations(animations, scene);
 
@@ -52,6 +52,29 @@ const Model = ({ animationState, setAnimationTime, animationDuration }) => {
     }
   }, [animations, animationDuration]);
 
+  // Log the meshes and change color based on part names
+  useEffect(() => {
+    if (scene) {
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          console.log(`Mesh name: ${child.name}, Mesh material color: ${child.material.color.getHex()}`);
+          
+          // For example, change the color of the wheels and brake calipers
+          if (child.name === "AlloyWheel") {
+            console.log("Changing AlloyWheel color");
+            child.material.color.set(colorChange.wheelColor);
+          }
+          if (child.name === "BrakeCaliper") {
+            console.log("Changing BrakeCaliper color");
+            child.material.color.set(colorChange.brakeCaliperColor);
+          }
+          // Log the updated color of the mesh after change
+          console.log(`Updated color of ${child.name}: ${child.material.color.getHex()}`);
+        }
+      });
+    }
+  }, [colorChange, scene]);
+
   return <primitive object={scene} />;
 };
 
@@ -60,6 +83,20 @@ const ThreeDPage = () => {
   const [animationState, setAnimationState] = useState("pause");
   const [animationTime, setAnimationTime] = useState(0);
   const [animationDuration, setAnimationDuration] = useState(0);
+
+  const [colorChange, setColorChange] = useState({
+    wheelColor: "#ff0000", // Initial color for wheels
+    brakeCaliperColor: "#0000ff", // Initial color for brake calipers
+  });
+
+  const changeColor = (part, color) => {
+    console.log(`Changing ${part} color to ${color}`);
+    setColorChange((prev) => {
+      const updatedColorChange = { ...prev, [part]: color };
+      console.log("Updated color state:", updatedColorChange);
+      return updatedColorChange;
+    });
+  };
 
   const handlePlay = () => setAnimationState("play");
   const handlePause = () => setAnimationState("pause");
@@ -74,26 +111,18 @@ const ThreeDPage = () => {
         <spotLight position={[3, 5, 4]} angle={0.1} intensity={5} />
         <spotLight position={[3, 2]} angle={0.1} intensity={5} />
         <Environment preset="city" background />
-        {/* <Environment
-          files="/model/background.exr"
-          background // This makes the HDR visible as a background
-        /> */}
-        <pointLight
-          color="white
-        "
-          intensity={2}
-          position={[0, 5, 0]}
-        />
+        <pointLight color="white" intensity={2} position={[0, 5, 0]} />
         <Model
           animationState={animationState}
           setAnimationTime={setAnimationTime}
           animationDuration={setAnimationDuration}
+          colorChange={colorChange}
         />
         <OrbitControls makeDefault />
       </Canvas>
 
       {/* Controls */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: "10%",
@@ -108,22 +137,14 @@ const ThreeDPage = () => {
           gap: "10px",
         }}
       >
-        <button onClick={handlePlay} style={buttonStyle}>
-          Play
-        </button>
-        <button onClick={handlePause} style={buttonStyle}>
-          Pause
-        </button>
-        <button onClick={handleResume} style={buttonStyle}>
-          Resume
-        </button>
-        <button onClick={handleReset} style={buttonStyle}>
-          Reset
-        </button>
-      </div>
+        <button onClick={handlePlay} style={buttonStyle}>Play</button>
+        <button onClick={handlePause} style={buttonStyle}>Pause</button>
+        <button onClick={handleResume} style={buttonStyle}>Resume</button>
+        <button onClick={handleReset} style={buttonStyle}>Reset</button>
+      </div> */}
 
       {/* Animation Time Display */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           top: "10px",
@@ -136,6 +157,14 @@ const ThreeDPage = () => {
       >
         <p>Animation Time: {animationTime.toFixed(2)}s</p>
         <p>Animation Duration: {animationDuration.toFixed(2)}s</p>
+      </div> */}
+
+      {/* Color Change Buttons */}
+      <div style={{ position: "absolute", bottom: "10%", left: "50%", transform: "translateX(-50%)" }}>
+        <button onClick={() => changeColor("wheelColor", "#ff0000")} style={buttonStyle}>Red Wheels</button>
+        <button onClick={() => changeColor("wheelColor", "#00ff00")} style={buttonStyle}>Green Wheels</button>
+        <button onClick={() => changeColor("brakeCaliperColor", "#0000ff")} style={buttonStyle}>Blue Brakes</button>
+        <button onClick={() => changeColor("brakeCaliperColor", "#ffff00")} style={buttonStyle}>Yellow Brakes</button>
       </div>
     </div>
   );
